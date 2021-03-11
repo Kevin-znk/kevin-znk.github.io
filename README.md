@@ -2,4 +2,4 @@
 .
 [falla](https://kevin-znk.github.io/falla/)
 
-[Game](https://kevin-znk.github.io/game/)
+[Game](https://kevin-znk.github.io/Game/)
