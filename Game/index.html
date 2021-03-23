@@ -46,12 +46,21 @@ leftfoot.position.set(75,-125,0);
 
     function animate() {
         requestAnimationFrame(animate);
-        avatar.rotation.z = avatar.rotation.z + 120;
+        avatar.rotation.z = avatar.rotation.z + 0.05;
         renderer.render(scene, camera);
     }
 animate()
 
-
+    var isCarwheeling = true;
+    function animate() {
+        requestAnimationFrame(animate);
+        if (isCarwheeling) {
+            avatar.rotation.z = avatar.rotation.z +0.05;
+        }
+        renderer.render(scene, camera);
+    }
+     animate();
+    
   // Now, show what the camera sees on the screen:
   renderer.render(scene, camera);
 </script>
