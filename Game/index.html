@@ -52,7 +52,7 @@ leftfoot.position.set(75,-125,0);
         if (code == "KeyD") avatar.position.x = avatar.position.x += 5;
         if (code == "KeyW") avatar.position.z = avatar.position.z -= 5;
         if (code == "KeyS") avatar.position.z = avatar.position.z += 5;
-
+        if (code == "KeyG") isCarwheeling = ! isCarwheeling;
     }
     
     
@@ -63,7 +63,7 @@ leftfoot.position.set(75,-125,0);
     }
 animate();
 
-    var isCarwheeling = true;
+    var isCarwheeling = false;
     function animate() {
         requestAnimationFrame(animate);
         if (isCarwheeling) {
