@@ -1,4 +1,4 @@
-gggwqad<body></body>
+<body></body>
 <script src="/lib/three.js"></script>
 <script>
   // The "scene" is where stuff in our game will happen:
@@ -10,7 +10,8 @@ gggwqad<body></body>
   // The "camera" is what sees the stuff:
   var aspectRatio = window.innerWidth / window.innerHeight;
   var camera = new THREE.PerspectiveCamera(75, aspectRatio, 1, 10000);
-  camera.position.z = 500;
+  camera.position.z = 5000;
+ camera.position.y = 2500;
   scene.add(camera);
 
   // The "renderer" draws what the camera sees onto the screen:
@@ -62,6 +63,23 @@ leftfoot.position.set(75,-125,0);
         trunk.position.set(x, -75, z);
         scene.add(trunk);
     }
+    
+    var distancia_arboles = 200
+    var minimo_x = -4000;
+    var maximo_x = 4000;
+    var minimo_z = -4000;
+    var maximo_z = 4000;
+    
+    
+    
+    
+    for (var x=-4000;x<=4000;x=x+400+distancia_arboles) {
+    for (var z=-4000;z<=4000;z=z+400+distancia_arboles) {
+        makeTreeAt(x,z)
+        }     
+    }
+    
+    
     
     makeTreeAt( 500, 0);
     makeTreeAt(-500, 0);
