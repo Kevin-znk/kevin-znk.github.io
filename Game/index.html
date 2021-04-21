@@ -96,8 +96,8 @@ leftfoot.position.set(75,-125,0);
                     
     function gestionarTecla(evento) {
         var code = evento.code;
-        if (code == "KeyA") avatar.position.x = marcador.position.x -= 5;
-        if (code == "KeyD") avatar.position.x = marcador.position.x += 5;
+        if (code == "KeyA") avatar.position.x = marcador.rotation.y -= 0.05;
+        if (code == "KeyD") avatar.position.x = marcador.rotation.y += 0.05;
         if (code == "KeyW") avatar.position.z = marcador.position.z -= 5;
         if (code == "KeyS") avatar.position.z = marcador.position.z += 5;
         if (code == "KeyG") isCarwheeling = ! isCarwheeling;
