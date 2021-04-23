@@ -21,6 +21,7 @@
     scene.add(marcador);
     marcador.add(avatar);
     marcador.add(camera);
+
   // The "renderer" draws what the camera sees onto the screen:
   var renderer = new THREE.WebGLRenderer({antialias: true});
   renderer.setSize(window.innerWidth, window.innerHeight);
@@ -104,6 +105,17 @@ leftfoot.position.set(75,-125,0);
         if (code == "KeyW") avatar.position.z = marcador.position.z -= 5;
         if (code == "KeyS") avatar.position.z = marcador.position.z += 5;
         if (code == "KeyG") isCarwheeling = ! isCarwheeling;
+    }
+    
+    function avanzar (objeto, radianes) {
+        var grados = (100*radianes / Math.PI) + 90;
+        
+        console.log("Grados" + grados);
+        console.log("X" + objeto.position.x);
+        console.log("Z" + objeto.position.z);
+        console.log("cos(radianes);" + Math.cos)
+        
+        
     }
     
     
