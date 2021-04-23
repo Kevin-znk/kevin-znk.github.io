@@ -11,6 +11,9 @@
   var aspectRatio = window.innerWidth / window.innerHeight;
   var camera = new THREE.PerspectiveCamera(75, aspectRatio, 1, 10000);
 
+    camera.position.z = 500;
+    //camera.position.y= 500;
+    //scene.add(camera);
 
     
     var marcador = new THREE.Object3D();
