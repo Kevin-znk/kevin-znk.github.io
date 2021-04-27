@@ -19,7 +19,6 @@
     var marcador = new THREE.Object3D();
     
     scene.add(marcador);
-    marcador.add(avatar);
     marcador.add(camera);
 
   // The "renderer" draws what the camera sees onto the screen:
@@ -32,7 +31,9 @@
 var body= new THREE.SphereGeometry(100);
 var cover= new THREE.MeshNormalMaterial(flat);
 var avatar= new THREE.Mesh(body, cover);
-scene.add(avatar);
+    
+marcador.add(avatar);
+
 //mano derecha
 var hand= new THREE.SphereGeometry(50);
 var righthand= new THREE.Mesh(hand, cover);
@@ -100,22 +101,26 @@ leftfoot.position.set(75,-125,0);
                     
     function gestionarTecla(evento) {
         var code = evento.code;
-        if (code == "KeyA") avatar.position.x = marcador.rotation.y -= 0.05;
-        if (code == "KeyD") avatar.position.x = marcador.rotation.y += 0.05;
-        if (code == "KeyW") avatar.position.z = marcador.position.z -= 5;
-        if (code == "KeyS") avatar.position.z = marcador.position.z += 5;
+        if (code == "KeyA") marcador.rotation.y -= 0.05;
+        if (code == "KeyD") marcador.rotation.y += 0.05;
+        if (code == "KeyW") avanzar(marcador, marcador.rotation.y, false);
+        if (code == "KeyS") avanzar(marcador, marcador.rotation.y, true);
         if (code == "KeyG") isCarwheeling = ! isCarwheeling;
     }
     
     function avanzar (objeto, radianes) {
-        var grados = (100*radianes / Math.PI) + 90;
+        var grados = (100*radianes / Math.PI);
         
+        console.log("Radianes;" + radianes);
         console.log("Grados" + grados);
         console.log("X" + objeto.position.x);
         console.log("Z" + objeto.position.z);
-        console.log("cos(radianes);" + Math.cos)
+        console.log("Cos(radianes);" + Math.cos(radianes));
+        console.log("Sen(radianes);" + Math.sin(radianes));
         
         
+    objeto.position.x += -20*Math.cos(radianes);
+    objeto.position.z += -20*Math.sin(radianes);
     }
     
     
