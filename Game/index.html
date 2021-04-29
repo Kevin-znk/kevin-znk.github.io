@@ -125,6 +125,19 @@ leftfoot.position.set(75,-125,0);
     }
     
     
+    
+    if(hayColision()) {
+        objeto.position.x += 20*Math.cos(radianes);
+    objeto.position.z -= 20*Math.sin(radianes);
+        
+    }
+    function hayColision() {
+        
+    return false;
+    }
+    
+    
+    
     function animate() {
         requestAnimationFrame(animate);
         avatar.rotation.z = avatar.rotation.z + 0.05;
