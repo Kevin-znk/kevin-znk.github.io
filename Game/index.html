@@ -103,12 +103,13 @@ leftfoot.position.set(75,-125,0);
         var code = evento.code;
         if (code == "KeyA") marcador.rotation.y -= 0.05;
         if (code == "KeyD") marcador.rotation.y += 0.05;
-        if (code == "KeyW") avanzar(marcador, marcador.rotation.y, false);
-        if (code == "KeyS") avanzar(marcador, marcador.rotation.y, true);
+        if (code == "KeyS") avanzar(marcador, marcador.rotation.y);
+        if (code == "KeyW") avanzar(marcador, marcador.rotation.y+ Math.PI);
         if (code == "KeyG") isCarwheeling = ! isCarwheeling;
     }
     
-    function avanzar (objeto, radianes) {
+    function avanzar(objeto, radianes) {
+        radianes += Math.PI/2;
         var grados = (100*radianes / Math.PI);
         
         console.log("Radianes;" + radianes);
@@ -119,8 +120,8 @@ leftfoot.position.set(75,-125,0);
         console.log("Sen(radianes);" + Math.sin(radianes));
         
         
-    objeto.position.x += -20*Math.cos(radianes);
-    objeto.position.z += -20*Math.sin(radianes);
+    objeto.position.x -= 20*Math.cos(radianes);
+    objeto.position.z += 20*Math.sin(radianes);
     }
     
     
