@@ -54,6 +54,7 @@ var leftfoot= new THREE.Mesh(foot, cover);
 leftfoot.position.set(75,-125,0);
     avatar.add(leftfoot);
 
+    var notAllowed = [];
     
     function makeTreeAt(x,z) {
         var trunk = new THREE.Mesh(
@@ -125,7 +126,8 @@ leftfoot.position.set(75,-125,0);
     }
     
     
-    
+      function hayColision() {
+          
     if(hayColision()) {
         objeto.position.x += 20*Math.cos(radianes);
     objeto.position.z -= 20*Math.sin(radianes);
@@ -136,7 +138,26 @@ leftfoot.position.set(75,-125,0);
     return false;
     }
     
-    
+    //Colisiones
+    var boundary = new THREE.Mesh(
+    new THREE.CircleGeometry(300),
+    new THREE.MeshNormalMaterial()
+    );
+    boundary.position.y=-100;
+    boundary.rotation.x=-Math.PI/2;
+    trunk.add(boundary);
+   
+    notAllowed.push(boundary);
+    //Is colliding
+    function isColliding(){
+        var vector= new THREE.Vector3(0,-1,0);
+        var raycaster= new THREE.Raycaster(marker.position, vector);
+       
+        var intersects = raycaster.intersectObjects(notAllowed);
+        if (intersects.lenght > 0) return true;
+        return false;
+    }
+          
     
     function animate() {
         requestAnimationFrame(animate);
