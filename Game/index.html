@@ -56,6 +56,16 @@ leftfoot.position.set(75,-125,0);
 
     var noPermitido = [];
     
+   //Si colisionamos
+    function hayColision(){
+        var vector= new THREE.Vector3(0,-1,0);
+        var raycaster= new THREE.Raycaster(marcador.position, vector);
+        var colisionados= raycaster.intersectObjects(noPermitido);
+        if (colisionados.length>0) return true;
+       
+        return false;
+    }
+   
     function makeTreeAt(x,z) {
         var trunk = new THREE.Mesh(
             new THREE.CylinderGeometry(50, 50, 200),
@@ -125,33 +135,22 @@ leftfoot.position.set(75,-125,0);
         radianes += Math.PI/2;
         var grados = (100*radianes / Math.PI);
         
+        Math.sin(grados);
+        Math.cos(grados);
+        var inc_x= -20*Math.sin(radianes);
+        var inc_z= -20*Math.cos(radianes);
+        objeto.position.x -= inc_x;
+        objeto.position.z -=inc_z;
+        
         console.log("Radianes;" + radianes);
         console.log("Grados" + grados);
         console.log("X" + objeto.position.x);
         console.log("Z" + objeto.position.z);
         console.log("Cos(radianes);" + Math.cos(radianes));
         console.log("Sen(radianes);" + Math.sin(radianes));
-    }
-
-        function hayColision() {
-    
-    
-                objeto.position.x -= 20*Math.cos(radianes);
-                objeto.position.z += 20*Math.sin(radianes);
-        
-        if(hayColision()) {
-            objeto.position.x += 20*Math.cos(radianes);
-            objeto.position.z -= 20*Math.sin(radianes);
-    }
-    
-
-    
-
-          
    
-        
+
     }
-   
 
     
     
