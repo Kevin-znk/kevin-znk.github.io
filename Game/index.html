@@ -21,6 +21,7 @@
     scene.add(marcador);
     marcador.add(camera);
 
+    
   // The "renderer" draws what the camera sees onto the screen:
   var renderer = new THREE.WebGLRenderer({antialias: true});
   renderer.setSize(window.innerWidth, window.innerHeight);
@@ -32,8 +33,46 @@ var body= new THREE.SphereGeometry(100);
 var cover= new THREE.MeshNormalMaterial(flat);
 var avatar= new THREE.Mesh(body, cover);
     
-marcador.add(avatar);
+    marcador.add(avatar);
 
+var noPermitido = [];
+   
+    function makeTreeAt(x,z) {
+        var trunk = new THREE.Mesh(
+            new THREE.CylinderGeometry(50, 50, 200),
+            new THREE.MeshBasicMaterial({color: "brown"})
+        );
+       
+       
+        var top = new THREE.Mesh(
+            new THREE.SphereGeometry(150),
+            new THREE.MeshBasicMaterial({color: "forestgreen"})
+        );
+        top.position.y = 175;
+        trunk.add(top);
+       
+        trunk.position.set(x, -75, z);
+        //Lista de objeto que no podemos atravesar
+        var circulo= new THREE.CircleGeometry(300);
+        var circulo_t= new THREE.MeshNormalMaterial();
+        var limite= new THREE.Mesh(circulo, circulo_t);
+   
+        
+        limite.position.y=-100;
+        limite.rotation.x=-Math.PI/2
+        trunk.add(limite);
+        noPermitido.push(limite);
+        scene.add(trunk);
+    }
+        //Si colisionamos
+    function hayColision(){
+        var vector= new THREE.Vector3(0,-1,0);
+        var raycaster= new THREE.Raycaster(marcador.position, vector);
+        var colisionados= raycaster.intersectObjects(noPermitido);
+        if (colisionados.length>0) return true;
+       
+        return false;
+    }
 //mano derecha
 var hand= new THREE.SphereGeometry(50);
 var righthand= new THREE.Mesh(hand, cover);
@@ -54,44 +93,10 @@ var leftfoot= new THREE.Mesh(foot, cover);
 leftfoot.position.set(75,-125,0);
     avatar.add(leftfoot);
 
-    var noPermitido = [];
-    
-   //Si colisionamos
-    function hayColision(){
-        var vector= new THREE.Vector3(0,-1,0);
-        var raycaster= new THREE.Raycaster(marcador.position, vector);
-        var colisionados= raycaster.intersectObjects(noPermitido);
-        if (colisionados.length>0) return true;
+ 
        
-        return false;
-    }
    
-    function makeTreeAt(x,z) {
-        var trunk = new THREE.Mesh(
-            new THREE.CylinderGeometry(50, 50, 200),
-            new THREE.MeshBasicMaterial({color: "brown"})
-        );
-        
-        
-        var top = new THREE.Mesh(
-            new THREE.SphereGeometry(150),
-            new THREE.MeshBasicMaterial({color: "forestgreen"})
-        );
-        top.position.y = 175;
-        trunk.add(top);
-        
-        trunk.position.set(x, -75, z);
-        
-            var circulo= new THREE.CircleGeometry(100);
-            var circulo_t= new THREE.MeshNormalMaterial();
-            var limite= new THREE.Mesh(circulo, circulo_t);
-    
-        limite.position.y=-100;
-        limite.rotation.x=-Math.PI/2;
-        trunk.add(limite);
-        noPermitido.push(limite);
-        scene.add(trunk);
-    }
+  
         
         
     
@@ -139,9 +144,14 @@ leftfoot.position.set(75,-125,0);
         Math.cos(grados);
         var inc_x= -20*Math.sin(radianes);
         var inc_z= -20*Math.cos(radianes);
-        objeto.position.x -= inc_x;
-        objeto.position.z -=inc_z;
+        objeto.position.x +=inc_x;
+        objeto.position.z +=inc_z;
         
+        if(hayColision()){
+        console.log("ha colisionado")
+        objeto.position.x -=inc_x
+        objeto.position.z -=inc_z
+        }
         console.log("Radianes;" + radianes);
         console.log("Grados" + grados);
         console.log("X" + objeto.position.x);
@@ -153,21 +163,6 @@ leftfoot.position.set(75,-125,0);
     }
 
     
-    
-          
-    
-          
-//    notAllowed.push(boundary);
-//    //Is colliding
-//    function isColliding(){
-//        var vector= new THREE.Vector3(0,-1,0);
-//        var raycaster= new THREE.Raycaster(marker.position, vector);
-//       
-//        var intersects = raycaster.intersectObjects(notAllowed);
-//        if (intersects.lenght > 0) return true;
-//        return false;
-//    }
-          
     
     function animate() {
         requestAnimationFrame(animate);
