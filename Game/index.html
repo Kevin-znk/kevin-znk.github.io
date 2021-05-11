@@ -1,5 +1,6 @@
 <body></body>
 <script src="/lib/three.js"></script>
+<script src="/lib/Scoreboard.js"></script>
 <script>
   // The "scene" is where stuff in our game will happen:
   var scene = new THREE.Scene();
@@ -28,7 +29,26 @@
   document.body.appendChild(renderer.domElement);
 
   // ******** START CODING ON THE NEXT LINE ********
-//cuerpo
+
+    var scoreBoard = new Scoreboard();
+    scoreBoard.countdown(15)
+    scoreBoard.score();
+    scoreBoard.help("Usa los cursores para encontrar las frutas de los arboles")
+    
+    
+    scoreBoard.onTimeExpired(gameOver)
+    
+    function gameOver(){
+        scoreBoard.message("se acabó el juego")
+        
+        
+        
+        
+    }
+    
+    
+    
+    //cuerpo
 var body= new THREE.SphereGeometry(100);
 var cover= new THREE.MeshNormalMaterial(flat);
 var avatar= new THREE.Mesh(body, cover);
